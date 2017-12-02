@@ -19,9 +19,10 @@ export default class TabBar extends React.Component {
 
   render() {
     return (
-      <Animated.View {...this.props} style={[styles.container]}>
+      <Animated.View {...this.props} style={[styles.container,Platform.OS=='ios'?this.props.style:'']}>
         <View style={[styles.bar_bg, this.props.style]}></View>
         {this.props.children}
+
         {/* <View style={[styles.shadow, this.props.shadowStyle]} /> */}
       </Animated.View>
     );
@@ -32,11 +33,12 @@ let styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-   // height: Layout.tabBarHeight,
+    height:Platform.OS=='ios'?Layout.tabBarHeight:undefined,
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
+
   },
   shadow: {
     backgroundColor: 'rgba(0, 0, 0, 0.25)',
@@ -47,13 +49,14 @@ let styles = StyleSheet.create({
     top: Platform.OS === 'android' ? 0 : -Layout.pixel,
   },
   bar_bg:{
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '#fff',
     height: Layout.tabBarHeight,
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    borderTopWidth:1,
-    borderColor:'rgba(0, 0, 0, 0.2)'
+    borderWidth:1,
+    borderColor:'rgba(0, 0, 0, 0.2)',
+
   }
 });
